@@ -20,3 +20,7 @@
 "weatherView.title" = "ToDo App List";
 
 "homeView.listbutton.title" = "Create new task";
+
+"listView.toDoHeading" = "To do";
+
+"listView.completedHeading" = "Completed";

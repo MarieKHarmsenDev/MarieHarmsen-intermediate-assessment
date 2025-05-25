@@ -39,66 +39,33 @@ struct HomeView: View {
     private var successView: some View {
         VStack {
             Title1(text: "weatherView.title".localized)
-            tempratureView
-            listView()
+            if let lat = viewModel.lat, let long = viewModel.long {
+                WeatherView(viewModel: WeatherViewModel(network:
+                                                            WeatherNetworkManager(latitude: String(lat), longitude: String(long))))
+            }
+            ListView()
             addButton
             Spacer()
         }
     }
     
-    private var tempratureView: some View {
-        VStack {
-            HStack {
-                createWeatherView(systemName: "thermometer.sun", value: viewModel.currentTempreature, color: .purple)
-                createWeatherView(systemName: "sunrise", value: viewModel.sunrise, color: .yellow)
-                createWeatherView(systemName: "sunset", value: viewModel.sunset, color: .red)
-            }
-            .frame(maxWidth: .infinity)
-            .padding()
-            .background(
-                RoundedRectangle(cornerRadius: 16)
-                    .fill(Color(.systemBackground))
-                    .shadow(radius: 2)
-            )
-            .padding(.horizontal, 16)
-        }
-    }
-    
-    private func createWeatherView(systemName: String, value: String, color: Color) -> some View {
-        HStack {
-            Image(systemName: systemName)
-                .foregroundColor(color)
-            Regular(text: value)
-        }
-    }
-    
-    private func listView() -> some View {
-        VStack {
-            List {
-                Regular(text: "example 1")
-                Regular(text: "example 2")
-                Regular(text: "example 3")
-            }
-        }
-    }
-    
     private var addButton: some View {
-            Button(action: {
-                print("Add to list")
-            }) {
-                HStack {
-                    Spacer()
-                    Image(systemName: "plus.circle.fill")
-                        .font(.system(size: 24, weight: .bold))
-                    Regular(text: "homeView.listbutton.title".localized)
-                    Spacer()
-                }
-                .padding()
-                .background(Color.orange)
-                .foregroundColor(.white)
-                .cornerRadius(12)
+        Button(action: {
+            print("Add to list")
+        }) {
+            HStack {
+                Spacer()
+                Image(systemName: "plus.circle.fill")
+                    .font(.system(size: 24, weight: .bold))
+                Regular(text: "homeView.listbutton.title".localized)
+                Spacer()
             }
-            .padding(.horizontal, 16)
+            .padding()
+            .background(Color.orange)
+            .foregroundColor(.white)
+            .cornerRadius(12)
+        }
+        .padding(.horizontal, 16)
     }
 }
 
