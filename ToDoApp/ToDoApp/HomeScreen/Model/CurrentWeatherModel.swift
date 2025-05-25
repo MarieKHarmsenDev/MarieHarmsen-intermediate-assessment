@@ -5,10 +5,10 @@
 //  Created by Marie Harmsen on 25/05/2025.
 //
 
-struct CurrentWeatherModel: Codable {
+struct CurrentWeatherModel: Equatable, Codable {
     let current: Current
 }
 
-struct Current: Codable {
+struct Current: Equatable, Codable {
     let tempC: Double
 }

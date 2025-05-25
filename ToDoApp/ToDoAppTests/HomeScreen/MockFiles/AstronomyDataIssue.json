@@ -1,0 +1,24 @@
+{
+    "location": {
+        "name": "New York",
+        "region": "New York",
+        "country": "United States of America",
+        "lat": 40.714,
+        "lon": -74.006,
+        "tz_id": "America/New_York",
+        "localtime_epoch": 1748181494,
+        "localtime": "2025-05-25 09:58"
+    },
+    "astronomy": {
+        "astro": {
+            "sunriseInvalid": "05:31 AM",
+            "sunsetInvalid": "08:16 PM",
+            "moonrise": "04:02 AM",
+            "moonset": "06:57 PM",
+            "moon_phase": "Waning Crescent",
+            "moon_illumination": 6,
+            "is_moon_up": 1,
+            "is_sun_up": 1
+        }
+    }
+}

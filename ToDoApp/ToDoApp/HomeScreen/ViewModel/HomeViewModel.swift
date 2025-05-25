@@ -56,10 +56,11 @@ class HomeViewModel: ObservableObject, LocationManagerDelegate {
                 DispatchQueue.main.async {
                     self?.astronomyWeather = response
                 }
+                group.leave()
             case .failure:
                 self?.updateFlowState(state: .error)
+                group.leave()
             }
-            group.leave()
         }
         
         group.enter()
@@ -69,10 +70,11 @@ class HomeViewModel: ObservableObject, LocationManagerDelegate {
                 DispatchQueue.main.async {
                     self?.currentWeather = response
                 }
+                group.leave()
             case .failure:
                 self?.updateFlowState(state: .error)
+                group.leave()
             }
-            group.leave()
         }
         
         group.notify(queue: .main) { [weak self] in
