@@ -5,15 +5,15 @@
 //  Created by Marie Harmsen on 25/05/2025.
 //
 
-struct AstronomyWeatherModel: Codable {
+struct AstronomyWeatherModel: Equatable, Codable {
     let astronomy: Astronomy
 }
 
-struct Astronomy: Codable {
+struct Astronomy: Equatable, Codable {
     let astro: Astro
 }
 
-struct Astro: Codable {
+struct Astro: Equatable, Codable {
     let sunrise: String
     let sunset: String
 }
