@@ -11,12 +11,11 @@ import CoreLocation
 
 class HomeViewModel: ObservableObject, LocationManagerDelegate {
     private let locationManager: LocationManager
-    private var network: WeatherNetworkManagerProtocol?
     @Published var shouldShowAlert: Bool = false
     @Published var flowState: FlowState = .loading
     
-    var currentWeather: CurrentWeatherModel?
-    var astronomyWeather: AstronomyWeatherModel?
+    var lat: Double? = nil
+    var long: Double? = nil
 
     init(locationManager: LocationManager) {
         self.locationManager = locationManager
@@ -33,65 +32,14 @@ class HomeViewModel: ObservableObject, LocationManagerDelegate {
             }
             return
         }
-        guard let lat = latitude, let long = longitude else {
-            return
-        }
-        network = WeatherNetworkManager(latitude: String(lat), longitude: String(long))
-        fetchWeatherData()
+        lat = latitude
+        long = longitude
+        updateFlowState(state: .success)
     }
     
     private func updateFlowState(state: FlowState) {
         DispatchQueue.main.async { [weak self] in
             self?.flowState = state
         }
-    }
-    
-    func fetchWeatherData() {
-        let group = DispatchGroup()
-
-        group.enter()
-        network?.fetchAstronomyWeatherData() { [weak self] result in
-            switch result {
-            case .success(let response):
-                DispatchQueue.main.async {
-                    self?.astronomyWeather = response
-                }
-                group.leave()
-            case .failure:
-                self?.updateFlowState(state: .error)
-                group.leave()
-            }
-        }
-        
-        group.enter()
-        network?.fetchCurrentWeatherData() { [weak self] result in
-            switch result {
-            case .success(let response):
-                DispatchQueue.main.async {
-                    self?.currentWeather = response
-                }
-                group.leave()
-            case .failure:
-                self?.updateFlowState(state: .error)
-                group.leave()
-            }
-        }
-        
-        group.notify(queue: .main) { [weak self] in
-            self?.updateFlowState(state: .success)
-        }
-    }
-    
-    var sunset: String {
-        return astronomyWeather?.astronomy.astro.sunset ?? ""
-    }
-    
-    var sunrise: String {
-        return astronomyWeather?.astronomy.astro.sunrise ?? ""
-    }
-    
-    var currentTempreature: String {
-        guard let temp = currentWeather?.current.tempC else { return "" }
-        return String(temp)
     }
 }

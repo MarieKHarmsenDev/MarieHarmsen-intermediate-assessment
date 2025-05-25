@@ -27,3 +27,12 @@ struct Regular: View {
             .font(.system(size: 18))
     }
 }
+
+struct Small: View {
+    var text: String
+
+    var body: some View {
+        Text(text)
+            .font(.system(size: 12))
+    }
+}
