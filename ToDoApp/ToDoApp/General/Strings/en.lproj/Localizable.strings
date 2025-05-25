@@ -1,0 +1,22 @@
+/* 
+  Localizable.strings
+  ToDoApp
+
+  Created by Marie Harmsen on 25/05/2025.
+  
+*/
+"loading.Loading" = "Loading...";
+
+"error.UnexpectedError" = "Unexpected Error";
+
+"locationPermission.alertTitle" = "App needs your location";
+
+"locationPermission.alertMessage" = "This app needs your location";
+
+"locationPermission.alertSettings" = "Open Settings";
+
+"locationPermission.alertCancel" = "Cancel";
+
+"weatherView.title" = "ToDo App List";
+
+"homeView.listbutton.title" = "Create new task";
