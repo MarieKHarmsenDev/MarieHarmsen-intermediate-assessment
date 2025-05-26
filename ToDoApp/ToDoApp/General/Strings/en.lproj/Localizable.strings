@@ -24,3 +24,13 @@
 "listView.toDoHeading" = "To do";
 
 "listView.completedHeading" = "Completed";
+
+"createListView.title" = "Title";
+
+"createListView.description" = "Description";
+
+"createListView.save" = "Save";
+
+"createListView.close" = "Close";
+
+"createListView.pageTitle" = "Create a new task";

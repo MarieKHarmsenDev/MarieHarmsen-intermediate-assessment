@@ -9,11 +9,23 @@ import SwiftUI
 
 struct Title1: View {
     var text: String
-    var color: Color? = .orange
+    var color: Color? = .accent
 
     var body: some View {
         Text(text)
             .font(.system(size: 48))
+            .foregroundColor(color)
+            .bold()
+    }
+}
+
+struct Title2: View {
+    var text: String
+    var color: Color? = .accent
+
+    var body: some View {
+        Text(text)
+            .font(.system(size: 28))
             .foregroundColor(color)
             .bold()
     }

@@ -9,10 +9,11 @@ import Foundation
 
 class WeatherViewModel: ObservableObject {
     private var network: WeatherNetworkManagerProtocol
+    private let logger = Logger()
     
-    @Published var currentTempreature: String = "No data"
-    @Published var sunrise: String  = "No data"
-    @Published var sunset: String  = "No data"
+    @Published var currentTempreature: String?
+    @Published var sunrise: String?
+    @Published var sunset: String?
 
     init(network: WeatherNetworkManagerProtocol) {
         self.network = network
@@ -24,11 +25,11 @@ class WeatherViewModel: ObservableObject {
             switch result {
             case .success(let response):
                 DispatchQueue.main.async {
-                    self?.sunrise = response?.astronomy.astro.sunrise ?? "No data"
-                    self?.sunset = response?.astronomy.astro.sunset ?? "No data"
+                    self?.sunrise = response?.astronomy.astro.sunrise
+                    self?.sunset = response?.astronomy.astro.sunset
                 }
-            case .failure:
-                print("")
+            case .failure(let error):
+                self?.logger.logError("fetch astronomy weather data failed with error: \(error)")
             }
         }
         
@@ -38,8 +39,8 @@ class WeatherViewModel: ObservableObject {
                 DispatchQueue.main.async {
                     self?.currentTempreature = String(response?.current.tempC ?? 0)
                 }
-            case .failure:
-                print("")
+            case .failure(let error):
+                self?.logger.logError("fetch current weather data failed with error: \(error)")
             }
         }
     }

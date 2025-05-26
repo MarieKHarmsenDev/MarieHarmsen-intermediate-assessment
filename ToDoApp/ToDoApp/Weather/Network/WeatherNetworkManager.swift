@@ -21,7 +21,7 @@ protocol WeatherNetworkManagerProtocol {
 
 class WeatherNetworkManager: WeatherNetworkManagerProtocol {
     
-    private let networkLogger = NetworkLogger()
+    private let logger = Logger()
     private let locationManager = LocationManager()
     private let decoder = JSONDecoder()
     
@@ -65,7 +65,7 @@ extension WeatherNetworkManager {
             let decodeData = try decoder.decode(AstronomyWeatherModel.self, from: data)
             return decodeData
         } catch {
-            networkLogger.logError("Failed to decode astronomy weather")
+            logger.logError("Failed to decode astronomy weather")
             return nil
         }
     }
@@ -96,7 +96,7 @@ extension WeatherNetworkManager {
             let decodeData = try decoder.decode(CurrentWeatherModel.self, from: data)
             return decodeData
         } catch {
-            networkLogger.logError("Failed to decode current weather")
+            logger.logError("Failed to decode current weather")
             return nil
         }
     }
