@@ -10,6 +10,10 @@ import CoreLocation
 
 struct HomeView: View {
     @StateObject private var viewModel = HomeViewModel(locationManager: LocationManager())
+    @Environment(\.modelContext) private var modelContext
+    @State private var toDoViewModel: ToDoViewModel?
+    
+    @State private var showBottomSheet = false
     
     var body: some View {
         switch viewModel.flowState {
@@ -38,20 +42,33 @@ struct HomeView: View {
     
     private var successView: some View {
         VStack {
-            Title1(text: "weatherView.title".localized)
-            if let lat = viewModel.lat, let long = viewModel.long {
-                WeatherView(viewModel: WeatherViewModel(network:
-                                                            WeatherNetworkManager(latitude: String(lat), longitude: String(long))))
+            if let toDoViewModel {
+                Title1(text: "weatherView.title".localized)
+                if let lat = viewModel.lat, let long = viewModel.long {
+                    WeatherView(viewModel: WeatherViewModel(network:
+                                                                WeatherNetworkManager(latitude: String(lat), longitude: String(long))))
+                }
+                ToDoView(viewModel: toDoViewModel)
+                addButton
+                Spacer()
+            } else {
+                ErrorView()
             }
-            ListView()
-            addButton
-            Spacer()
+        }
+        .sheet(isPresented: $showBottomSheet) {
+            if let toDoViewModel {
+                CreateToDoListView(viewModel: toDoViewModel)
+                    .presentationDetents([.medium, .large])
+            }
+        }
+        .onAppear() {
+            toDoViewModel = ToDoViewModel(modelContext: modelContext)
         }
     }
     
     private var addButton: some View {
         Button(action: {
-            print("Add to list")
+            showBottomSheet = true
         }) {
             HStack {
                 Spacer()

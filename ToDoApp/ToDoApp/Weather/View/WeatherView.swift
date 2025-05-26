@@ -28,11 +28,15 @@ struct WeatherView: View {
         }
     }
     
-    private func createWeatherView(systemName: String, value: String) -> some View {
+    private func createWeatherView(systemName: String, value: String?) -> some View {
         HStack {
             Image(systemName: systemName)
                 .foregroundColor(.accent)
-            Regular(text: value)
+            if let value = value {
+                Regular(text: value)
+            } else {
+                ProgressView()
+            }
         }
     }
 }
