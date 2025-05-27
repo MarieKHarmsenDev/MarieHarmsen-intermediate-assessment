@@ -46,10 +46,10 @@ struct HomeView: View {
                 Title1(text: "weatherView.title".localized)
                 if let lat = viewModel.lat, let long = viewModel.long {
                     WeatherView(viewModel: WeatherViewModel(network:
-                                                                WeatherNetworkManager(latitude: String(lat), longitude: String(long))))
+                                                            NetworkManager(latitude: String(lat), longitude: String(long))))
                 }
                 ToDoView(viewModel: toDoViewModel)
-                addButton
+                PrimaryButton(action: {showBottomSheet = true }, imageName: "plus.circle.fill", buttonText: "homeView.listbutton.title".localized, isDisabled: false)
                 Spacer()
             } else {
                 ErrorView()
@@ -64,25 +64,6 @@ struct HomeView: View {
         .onAppear() {
             toDoViewModel = ToDoViewModel(modelContext: modelContext)
         }
-    }
-    
-    private var addButton: some View {
-        Button(action: {
-            showBottomSheet = true
-        }) {
-            HStack {
-                Spacer()
-                Image(systemName: "plus.circle.fill")
-                    .font(.system(size: 24, weight: .bold))
-                Regular(text: "homeView.listbutton.title".localized)
-                Spacer()
-            }
-            .padding()
-            .background(Color.orange)
-            .foregroundColor(.white)
-            .cornerRadius(12)
-        }
-        .padding(.horizontal, 16)
     }
 }
 

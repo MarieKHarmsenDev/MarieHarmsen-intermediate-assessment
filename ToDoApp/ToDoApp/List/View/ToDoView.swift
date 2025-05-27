@@ -4,8 +4,8 @@
 //
 //  Created by Marie Harmsen on 25/05/2025.
 //
+
 import SwiftUI
-import SwiftData
 
 struct ToDoView: View {
     private let viewModel: ToDoViewModel
@@ -17,25 +17,28 @@ struct ToDoView: View {
     var body: some View {
         VStack {
             List {
-                Section(header: Regular(text: "listView.toDoHeading".localized)) {
-                    ForEach(viewModel.toDoItems.filter { !$0.isCompleted }) { item in
-                        createToDoRow(item: item)
-                    }
-                    .onDelete(perform: viewModel.deleteItem)
-                }
-                
-                Section(header: Regular(text: "listView.completedHeading".localized)) {
-                    ForEach(viewModel.toDoItems.filter { $0.isCompleted }) { item in
-                        createToDoRow(item: item)
-                    }
-                    .onDelete(perform: viewModel.deleteItem)
-                }
+                createSection(header: "listView.toDoHeading".localized, items: viewModel.toDoItems)
+                createSection(header: "listView.completedHeading".localized, items: viewModel.completedItems)
             }
             .listStyle(InsetGroupedListStyle())
         }
     }
     
-    private func createToDoRow(item: ToDoItem) -> some View {
+    private func createSection(header: String, items: [Item]) -> some View {
+        Section(header: Regular(text: header)) {
+            ForEach(items) { item in
+                createToDoRow(item: item)
+            }
+            .onDelete { indexSet in
+                for index in indexSet {
+                    let item = items[index]
+                    viewModel.deleteItem(item: item)
+                }
+            }
+        }
+    }
+    
+    private func createToDoRow(item: Item) -> some View {
         Button(action: {
             viewModel.updateCompleteStatus(item: item)
         }) {

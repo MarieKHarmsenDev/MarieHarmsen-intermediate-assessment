@@ -26,6 +26,7 @@ struct CreateToDoListView: View {
                     dismiss()
                 }
             }
+            .padding(.vertical)
 
             TextField("createListView.title".localized, text: $titleText)
                 .textFieldStyle(.roundedBorder)
@@ -36,18 +37,14 @@ struct CreateToDoListView: View {
                 .frame(height: 44)
             
             Spacer()
-
-            Button("createListView.save".localized) {
-                viewModel.addItem(titleText: titleText, descriptionText: descriptionText)
+            
+            let successAction = {
                 dismiss()
+                viewModel.addItem(titleText: titleText, descriptionText: descriptionText)
             }
-            .frame(maxWidth: .infinity)
-            .padding()
-            .foregroundColor(.white)
-            .background(.accent)
-            .cornerRadius(8)
-            .disabled(titleText.isEmpty || descriptionText.isEmpty)
+            
+            PrimaryButton(action: successAction, imageName: "plus.circle.fill", buttonText: "createListView.save".localized, isDisabled: titleText.isEmpty || descriptionText.isEmpty)
         }
-        .padding()
+        .padding(.horizontal)
     }
 }
