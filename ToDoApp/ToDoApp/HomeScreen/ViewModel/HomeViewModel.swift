@@ -10,22 +10,22 @@ import Foundation
 import CoreLocation
 
 class HomeViewModel: ObservableObject, LocationManagerDelegate {
-    private let locationManager: LocationManager
+    private var locationManager: LocationMnagerProtocol
     @Published var shouldShowAlert: Bool = false
     @Published var flowState: FlowState = .loading
     
     var lat: Double? = nil
     var long: Double? = nil
 
-    init(locationManager: LocationManager) {
+    init(locationManager: LocationMnagerProtocol) {
         self.locationManager = locationManager
-        locationManager.delegate = self
+        self.locationManager.delegate = self
     }
 
     func didUpdateLocation(latitude: Double?, longitude: Double?, error: LocationError?) {
         if let error = error {
             switch error {
-            case .locationManagerError, .locationError:
+            case .locationError:
                 updateFlowState(state: .error)
             case .userPermission:
                 DispatchQueue.main.async { [weak self] in
