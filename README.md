@@ -1,7 +1,7 @@
 # MarieHarmsen-intermediate-assessment
 MarieHarmsen-intermediate assessment
 
-# iOSForestCast
+# iOSToDOApp
 iOS Application that displays current temp, sunrise, sunset and items under a section called "To do" and "Completed"
 
 iOS version: 
