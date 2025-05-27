@@ -1,19 +1,19 @@
 //
-//  CurrentWeatherModel.swift
+//  AstronomyWeatherModel.swift
 //  ToDoApp
 //
 //  Created by Marie Harmsen on 25/05/2025.
 //
 
-struct AstronomyWeatherModel: Equatable, Codable {
+struct AstronomyWeatherModel: Equatable, Decodable {
     let astronomy: Astronomy
 }
 
-struct Astronomy: Equatable, Codable {
+struct Astronomy: Equatable, Decodable {
     let astro: Astro
 }
 
-struct Astro: Equatable, Codable {
+struct Astro: Equatable, Decodable {
     let sunrise: String
     let sunset: String
 }

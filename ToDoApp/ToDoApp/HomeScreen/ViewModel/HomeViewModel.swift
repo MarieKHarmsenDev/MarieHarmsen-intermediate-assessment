@@ -28,7 +28,9 @@ class HomeViewModel: ObservableObject, LocationManagerDelegate {
             case .locationManagerError, .locationError:
                 updateFlowState(state: .error)
             case .userPermission:
-                shouldShowAlert = true
+                DispatchQueue.main.async { [weak self] in
+                    self?.shouldShowAlert = true
+                }
             }
             return
         }

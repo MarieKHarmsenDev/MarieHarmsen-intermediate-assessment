@@ -8,14 +8,13 @@ import Foundation
 import SwiftData
 
 @Model
-class ToDoItem: Identifiable {
+class Item: Identifiable {
     var id = UUID()
     var titleText: String
     var descriptionText: String
     var isCompleted: Bool
     
-    init(id: UUID = UUID(), titleText: String, descriptionText: String, isCompleted: Bool) {
-        self.id = id
+    init(titleText: String, descriptionText: String, isCompleted: Bool) {
         self.titleText = titleText
         self.descriptionText = descriptionText
         self.isCompleted = isCompleted

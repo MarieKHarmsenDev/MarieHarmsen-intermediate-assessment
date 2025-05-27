@@ -13,7 +13,14 @@ import SwiftData
 @Observable
 class ToDoViewModel {
     private let modelContext: ModelContext
-    var toDoItems: [ToDoItem] = []
+    var allItems: [Item] = []
+
+    var toDoItems: [Item] {
+        allItems.filter { !$0.isCompleted }
+    }
+    var completedItems: [Item] {
+        allItems.filter { $0.isCompleted }
+    }
     let logger = Logger()
 
     init(modelContext: ModelContext) {
@@ -23,24 +30,21 @@ class ToDoViewModel {
 
     func fetchItems() {
         do {
-            let descriptor = FetchDescriptor<ToDoItem>()
-            self.toDoItems = try modelContext.fetch(descriptor)
+            let descriptor = FetchDescriptor<Item>()
+            self.allItems = try modelContext.fetch(descriptor)
         } catch {
             logger.logError("Failed to fetch todo items")
         }
     }
 
     func addItem(titleText: String, descriptionText: String) {
-        let item = ToDoItem(titleText: titleText, descriptionText: descriptionText, isCompleted: false)
+        let item = Item(titleText: titleText, descriptionText: descriptionText, isCompleted: false)
         modelContext.insert(item)
         saveItem()
     }
     
-    func deleteItem(at offsets: IndexSet) {
-        for index in offsets {
-            let item = toDoItems[index]
-            modelContext.delete(item)
-        }
+    func deleteItem(item: Item) {
+        modelContext.delete(item)
         saveItem()
     }
     
@@ -53,8 +57,8 @@ class ToDoViewModel {
         }
     }
     
-    func updateCompleteStatus(item: ToDoItem) {
-        item.isCompleted.toggle()
+    func updateCompleteStatus(item: Item) {
+        item.isCompleted = !item.isCompleted
         saveItem()
     }
 }

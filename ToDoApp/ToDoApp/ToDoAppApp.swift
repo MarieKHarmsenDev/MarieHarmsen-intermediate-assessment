@@ -14,6 +14,6 @@ struct ToDoAppApp: App {
         WindowGroup {
             HomeView()
         }
-        .modelContainer(for: ToDoItem.self)
+        .modelContainer(for: Item.self)
     }
 }

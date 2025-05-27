@@ -9,7 +9,7 @@
 
 "error.UnexpectedError" = "Unexpected Error";
 
-"locationPermission.alertTitle" = "App needs your location";
+"locationPermission.alertTitle" = "ToDoAppList needs your location";
 
 "locationPermission.alertMessage" = "This app needs your location";
 

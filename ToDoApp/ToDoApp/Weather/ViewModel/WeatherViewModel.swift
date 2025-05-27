@@ -8,20 +8,35 @@ import SwiftUI
 import Foundation
 
 class WeatherViewModel: ObservableObject {
-    private var network: WeatherNetworkManagerProtocol
+    private var network: NetworkManagerProtocol
     private let logger = Logger()
     
     @Published var currentTempreature: String?
     @Published var sunrise: String?
     @Published var sunset: String?
 
-    init(network: WeatherNetworkManagerProtocol) {
+    init(network: NetworkManagerProtocol) {
         self.network = network
-        fetchWeatherData()
+        fetchCurrentWeatherData()
+        fetchAstronomyWeatherData()
     }
     
-    func fetchWeatherData() {
-        network.fetchAstronomyWeatherData() { [weak self] result in
+    func fetchCurrentWeatherData() {
+        network.fetchData(fileName: .current, type: CurrentWeatherModel.self) { [weak self] result in
+            switch result {
+            case .success(let response):
+                DispatchQueue.main.async {
+                    let stringTemp = String(response?.current.tempC ?? 0)
+                    self?.currentTempreature = stringTemp + "°C"
+                }
+            case .failure(let error):
+                self?.logger.logError("fetch current weather data failed with error: \(error)")
+            }
+        }
+    }
+    
+    func fetchAstronomyWeatherData() {
+        network.fetchData(fileName: .astronomy, type: AstronomyWeatherModel.self) { [weak self] result in
             switch result {
             case .success(let response):
                 DispatchQueue.main.async {
@@ -30,17 +45,6 @@ class WeatherViewModel: ObservableObject {
                 }
             case .failure(let error):
                 self?.logger.logError("fetch astronomy weather data failed with error: \(error)")
-            }
-        }
-        
-        network.fetchCurrentWeatherData() { [weak self] result in
-            switch result {
-            case .success(let response):
-                DispatchQueue.main.async {
-                    self?.currentTempreature = String(response?.current.tempC ?? 0)
-                }
-            case .failure(let error):
-                self?.logger.logError("fetch current weather data failed with error: \(error)")
             }
         }
     }

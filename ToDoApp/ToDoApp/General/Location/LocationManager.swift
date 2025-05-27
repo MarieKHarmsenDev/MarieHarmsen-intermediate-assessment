@@ -22,8 +22,6 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     private let locationManager = CLLocationManager()
     weak var delegate: LocationManagerDelegate?
     
-    var currentLocation: CLLocation?
-
     override init() {
         super.init()
         locationManager.delegate = self
@@ -43,15 +41,12 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         }
     }
 
-    // MARK: - CLLocationManagerDelegate
-
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let latestLocation = locations.last else {
             delegate?.didUpdateLocation(latitude: nil, longitude: nil, error: .locationError)
             return
         }
         locationManager.stopUpdatingLocation()
-        self.currentLocation = latestLocation
         delegate?.didUpdateLocation(latitude: latestLocation.coordinate.latitude, longitude: latestLocation.coordinate.longitude, error: nil)
     }
 
