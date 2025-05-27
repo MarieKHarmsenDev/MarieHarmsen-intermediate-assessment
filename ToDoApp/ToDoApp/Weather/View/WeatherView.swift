@@ -14,7 +14,9 @@ struct WeatherView: View {
         VStack {
             HStack {
                 createWeatherView(systemName: "thermometer.sun", value: viewModel.currentTempreature)
+                Spacer()
                 createWeatherView(systemName: "sunrise", value: viewModel.sunrise)
+                Spacer()
                 createWeatherView(systemName: "sunset", value: viewModel.sunset)
             }
             .frame(maxWidth: .infinity)
@@ -29,11 +31,11 @@ struct WeatherView: View {
     }
     
     private func createWeatherView(systemName: String, value: String?) -> some View {
-        HStack {
+        VStack {
             Image(systemName: systemName)
                 .foregroundColor(.accent)
             if let value = value {
-                Regular(text: value)
+                Small(text: value)
             } else {
                 ProgressView()
             }

@@ -21,10 +21,11 @@ struct PrimaryButton: View {
                 Spacer()
             }
             .padding()
-            .background(.accent)
+            .background(isDisabled ? .gray : .accent)
             .foregroundColor(.white)
             .cornerRadius(12)
         }
+        .disabled(isDisabled)
         .padding(.horizontal, 16)
     }
 }

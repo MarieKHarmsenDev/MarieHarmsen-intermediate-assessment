@@ -45,6 +45,6 @@ struct CreateToDoListView: View {
             
             PrimaryButton(action: successAction, imageName: "plus.circle.fill", buttonText: "createListView.save".localized, isDisabled: titleText.isEmpty || descriptionText.isEmpty)
         }
-        .padding(.horizontal)
+        .padding()
     }
 }

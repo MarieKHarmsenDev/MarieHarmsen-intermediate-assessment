@@ -13,7 +13,7 @@ struct Title1: View {
 
     var body: some View {
         Text(text)
-            .font(.system(size: 48))
+            .font(.title)
             .foregroundColor(color)
             .bold()
     }
@@ -25,7 +25,7 @@ struct Title2: View {
 
     var body: some View {
         Text(text)
-            .font(.system(size: 28))
+            .font(.headline)
             .foregroundColor(color)
             .bold()
     }
@@ -36,7 +36,7 @@ struct Regular: View {
 
     var body: some View {
         Text(text)
-            .font(.system(size: 18))
+            .font(.body)
     }
 }
 
@@ -45,6 +45,6 @@ struct Small: View {
 
     var body: some View {
         Text(text)
-            .font(.system(size: 12))
+            .font(.callout)
     }
 }
