@@ -24,12 +24,12 @@ Dark mode | Home | Create task |
  --- | --- | --- |
 Images | <<img width="440" alt="Screenshot 2025-05-27 at 22 33 56" src="https://github.com/user-attachments/assets/e8b9fd61-eb18-459c-9976-7670ec3861e9" /> | <img width="429" alt="Screenshot 2025-05-27 at 22 34 24" src="https://github.com/user-attachments/assets/2da6a94b-1242-40a8-be29-f16a85aa04e0" /> |
 
-Large text
+Large text |
 <img width="435" alt="Screenshot 2025-05-27 at 22 35 12" src="https://github.com/user-attachments/assets/63fc8e98-8528-453a-99da-af0ec769f367" />
 <img width="443" alt="Screenshot 2025-05-27 at 22 35 23" src="https://github.com/user-attachments/assets/2d09f4bf-0659-4fa3-9061-2a0ddffbca28" />
 
-Offline mode
-
+Offline mode |
+<img width="428" alt="Screenshot 2025-05-28 at 00 00 29" src="https://github.com/user-attachments/assets/271de961-60ed-455f-a3b1-cc440dbb93b9" />
 
 API:
 weatherapi
@@ -43,6 +43,6 @@ Add UI tests
 
 Both the contibutiors are my accounts, the other name is for my gym app that I'm building. Sometimes Sourcetree switches accounts.
 All branch and commits:
-<img width="234" alt="Screenshot 2025-05-27 at 21 45 52" src="https://github.com/user-attachments/assets/94ae03bf-b21e-4044-ba39-958cee8f85c5" />
+<img width="234" alt="Screenshot 2025-05-27 at 21 45 52" src="https://github.com/user-attachments/assets/94ae03bf-b21e-4044-ba39-958cee8f85c5" /> |
 My app:
 <img width="447" alt="Screenshot 2025-05-27 at 21 49 13" src="https://github.com/user-attachments/assets/1d848639-7a71-496a-89aa-cb643d706f4d" />
