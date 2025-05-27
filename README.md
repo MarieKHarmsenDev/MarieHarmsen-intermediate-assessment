@@ -42,6 +42,8 @@ Add UI tests  <br />
 
 
 Both the contibutiors are my accounts, the other name is for my gym app that I'm building. Sometimes Sourcetree switches accounts.  <br />
+<img width="616" alt="Screenshot 2025-05-28 at 00 20 03" src="https://github.com/user-attachments/assets/2dd52567-f365-483c-b8eb-6b47d5e3e746" />
+
 All branch and commits:  <br />
 <img width="234" alt="Screenshot 2025-05-27 at 21 45 52" src="https://github.com/user-attachments/assets/94ae03bf-b21e-4044-ba39-958cee8f85c5" />  <br />
 My other app  <br />
