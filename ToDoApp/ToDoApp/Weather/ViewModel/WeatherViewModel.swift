@@ -40,8 +40,8 @@ class WeatherViewModel: ObservableObject {
             switch result {
             case .success(let response):
                 DispatchQueue.main.async {
-                    self?.sunrise = response?.astronomy.astro.sunrise
-                    self?.sunset = response?.astronomy.astro.sunset
+                    self?.sunrise = response?.astronomy.astro.sunrise.removeStartingZero
+                    self?.sunset = response?.astronomy.astro.sunset.removeStartingZero
                 }
             case .failure(let error):
                 self?.logger.logError("fetch astronomy weather data failed with error: \(error)")
