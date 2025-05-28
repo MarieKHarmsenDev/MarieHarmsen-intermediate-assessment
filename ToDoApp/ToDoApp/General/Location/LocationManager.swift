@@ -10,7 +10,6 @@ import Foundation
 
 enum LocationError: Error {
     case locationError
-    case locationManagerError
     case userPermission
 }
 
@@ -18,9 +17,15 @@ protocol LocationManagerDelegate: AnyObject {
     func didUpdateLocation(latitude: Double?, longitude: Double?, error: LocationError?)
 }
 
-class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
+protocol LocationMnagerProtocol {
+    var delegate: LocationManagerDelegate? { get set }
+    func handleLocationAuthorised()
+}
+
+class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate, LocationMnagerProtocol {
+    
     private let locationManager = CLLocationManager()
-    weak var delegate: LocationManagerDelegate?
+    var delegate: LocationManagerDelegate?
     
     override init() {
         super.init()
@@ -28,7 +33,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
     }
     
-    private func handleLocationAuthorised() {
+    func handleLocationAuthorised() {
         switch locationManager.authorizationStatus {
         case .notDetermined:
             locationManager.requestWhenInUseAuthorization()
@@ -55,6 +60,6 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     }
 
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        delegate?.didUpdateLocation(latitude: nil, longitude: nil, error: .locationManagerError)
+        delegate?.didUpdateLocation(latitude: nil, longitude: nil, error: .locationError)
     }
 }

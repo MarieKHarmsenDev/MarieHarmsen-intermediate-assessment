@@ -58,8 +58,8 @@ class WeatherViewModelTests: XCTestCase {
         sut.fetchCurrentWeatherData()
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
-            XCTAssertEqual(self?.sut.sunset, "08:16 PM")
-            XCTAssertEqual(self?.sut.sunrise, "05:31 AM")
+            XCTAssertEqual(self?.sut.sunset, "8:16 PM")
+            XCTAssertEqual(self?.sut.sunrise, "5:31 AM")
             expectation.fulfill()
         }
 
